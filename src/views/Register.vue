@@ -7,7 +7,7 @@
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 height: '100vh',
-            }" class="bg-purple-800 relative block lg:order-last lg:col-span-5  xl:col-span-6">
+            }" class="bg-fuchsia-950 relative block lg:order-last lg:col-span-5  xl:col-span-6">
                 <Slice />
             </div>
             <main aria-label="Main"
@@ -27,89 +27,25 @@
                     <p class="text-white">{{ user }}</p>
 
                     <p class="mt-4 leading-relaxed text-gray-500">
-                        !Hola, te extrañamos¡
+                        Bienvenidos(a)!
                     </p>
+                    <div class="text-white">
+                        <p>Tipo de persona</p>
 
-                    <form @submit.prevent="setUser(newUser)" class="mt-8 grid grid-cols-6 gap-6">
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="Name" class="block text-sm font-medium text-gray-700">
-                                Nombre
-                            </label>
-                            <input type="text" id="name" name="name" v-model="newUser.name"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
+                        <label for="Tipe">Natural</label>
+                        <input type="checkbox" class="indeterminate:bg-gray-300" name="natural"
+                            v-on:change="type = 'natural'" />
 
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="LastName" class="block text-sm font-medium text-gray-700">
-                                Apellido
-                            </label>
-                            <input type="text" id="lastname" name="lastname" v-model="newUser.lastname"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="Phone" class="block text-sm font-medium text-gray-700">
-                                Telefono
-                            </label>
-                            <input type="text" id="telephone" name="telephone" v-model="newUser.telephone"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="IdentyDocument" class="block text-sm font-medium text-gray-700">
-                                Numero de identificacion
-                            </label>
-                            <input type="text" id="identy_document" name="identy_document" v-model="newUser.identy_document"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="Email" class="block text-sm font-medium text-gray-700">
-                                Email
-                            </label>
-                            <input type="text" id="email" name="email" v-model="newUser.email"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="Password" class="block text-sm font-medium text-gray-700">
-                                Password
-                            </label>
-                            <input type="password" id="password" name="password" v-model="newUser.password"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="ConfirmationPassword" class="block text-sm font-medium text-gray-700">
-                                Confirmar contraseña
-                            </label>
-                            <input type="password" id="password_confirmation" name="password_confirmation"
-                                v-model="newUser.password_confirmation"
-                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-                        </div>
-
-                        <div class="col-span-6">
-                            <p class="text-sm text-gray-500">
-
-                                <a href="#" class="text-gray-700 underline">
-                                    ¿ Olvido la contraseña ?
-                                </a>
-
-                            </p>
-                        </div>
-
-                        <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                            <button type="submit"
-                                class="inline-block shrink-0 rounded-md border border-blue-600 bg-purple-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
-                                Registrar
-                            </button>
-
-                            <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                                ya estas registrado
-                                <router-link to="/" class="text-gray-700 underline">Acceder</router-link>.
-                            </p>
-                        </div>
-                    </form>
+                        <label for="Tipe">Juridica</label>
+                        <input type="checkbox" class="indeterminate:bg-gray-300" name="juridica"
+                            v-on:change="type = 'juridict'" />
+                    </div>
+                    <div v-if="type === 'natural'">
+                        <Natural />
+                    </div>
+                    <div v-else="type === 'juridict'">
+                        <Juridict />
+                    </div>
                 </div>
             </main>
         </div>
@@ -119,28 +55,21 @@
 <script>
 import { defineComponent } from 'vue';
 import Slice from '../components/Slice.vue'
+import Natural from '../components/Natural.vue'
+import Juridict from '../components/Juridict.vue'
 import { mapGetters, mapActions } from 'vuex'
 import sha256 from '@/utils/signature';
 
 export default defineComponent({
     name: 'Register',
     components: {
-        Slice
+        Slice,
+        Natural,
+        Juridict
     },
     data() {
         return {
-            newUser: {
-                name: '',
-                lastname: '',
-                telephone: '',
-                identy_document: '',
-                type_user_id: "2",
-                verify_tc: "1",
-                password: '',
-                password_confirmation: '',
-                email: '',
-                signature: ''
-            }
+            type: ''
         }
     },
     async mounted() {

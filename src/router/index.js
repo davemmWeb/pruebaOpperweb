@@ -2,27 +2,35 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "@/views/Login.vue";
 
 const routes = [
-	{ path: "/", name: "Login", component: Login },
+	{
+		path: "/",
+		name: "Login",
+		component: () => import("@/views/Login.vue"),
+	},
 	{
 		path: "/register",
 		name: "Register",
 		component: () => import("@/views/Register.vue"),
 	},
-	{ path: "/home", name: "Home", component: () => import("@/views/Home.vue") },
 	{
-		path: "/backoffice",
-		name: "Backoffice",
-		component: () => import("@/views/Backoffice.vue"),
+		path: "/backoffice/select",
+		name: "BackofficeSelect",
+		component: () => import("@/views/BackofficeSelect.vue"),
 	},
 	{
-		path: "/backoffice/selected",
-		name: "SelectCategory",
-		component: () => import("@/components/SelectCategory.vue"),
+		path: "/backoffice/categories",
+		name: "BackofficeCategories",
+		component: () => import("@/views/BackofficeCategories.vue"),
 	},
 	{
-		path: "/categories",
-		name: "ListCategory",
-		component: () => import("@/components/SelectCategory.vue"),
+		path: "/backoffice/update",
+		name: "BackofficeUpdate",
+		component: () => import("@/views/BackofficeUpdate.vue"),
+	},
+	{
+		path: "/backoffice/create",
+		name: "BackofficeCreate",
+		component: () => import("@/views/BackofficeCreate.vue"),
 	},
 ];
 

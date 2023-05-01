@@ -1,11 +1,11 @@
 <template>
-    <div class="flex h-screen flex-col justify-between border-e bg-purple">
+    <div class="flex h-screen flex-col justify-between bg-fuchsia-950">
         <div class="px-4 py-6">
             <div>
-                <span class="grid h-10 w-12 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+                <span class="grid h-10 w-12 place-content-center rounded-lg text-xs text-gray-600">
                     <img src="../assets/logo.png" alt="logo">
                 </span>
-                <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+                <span class="grid h-10 w-32 place-content-center rounded-lg  text-xs text-gray-600">
                     <img src="../assets/animeyabu..png" alt="animeyabu">
                 </span>
 
@@ -35,7 +35,7 @@
                     </summary>
 
                     <nav aria-label="Teams Nav" class="mt-2 flex flex-col px-4">
-                        <router-link to="/categories"
+                        <router-link to="/backoffice/categories"
                             class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-75" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -46,7 +46,7 @@
                             <span class="text-sm font-medium"> Ver todas </span>
                         </router-link>
 
-                        <a href="#"
+                        <router-link to="/backoffice/create"
                             class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-75" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -55,11 +55,11 @@
                             </svg>
 
                             <span class="text-sm font-medium"> Crear </span>
-                        </a>
+                        </router-link>
                     </nav>
                 </details>
 
-                <a href="#"
+                <router-link to="/"
                     class="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-75" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" strokeWidth="2">
@@ -68,7 +68,7 @@
                     </svg>
 
                     <span class="text-sm font-medium"> Cerrar sesion </span>
-                </a>
+                </router-link>
             </nav>
         </div>
     </div>
