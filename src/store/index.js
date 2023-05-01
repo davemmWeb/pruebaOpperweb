@@ -1,17 +1,8 @@
 import { createStore } from "vuex";
+import moduleLogin from "./login";
 
 export default createStore({
-	state: {
-		users: ["pepito", "sultanito"],
-	},
-	mutations: {
-		["AGREGAR_USUARIO"](state, user) {
-			state.users.push(user);
-		},
-	},
-	actions: {
-		agregarUsuario: ({ commit }, user) => {
-			commit("AGREGAR_USUARIO", user);
-		},
+	modules: {
+		moduleLogin,
 	},
 });

@@ -1,11 +1,4 @@
 <template>
-  <!--
-    Heads up! 👋
-  
-    Plugins:
-      - @tailwindcss/forms
-  -->
-
   <section class="bg-black">
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
       <div :style="{
