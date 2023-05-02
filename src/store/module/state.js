@@ -3,7 +3,7 @@ const state = {
 	token: null,
 	auth: false,
 	userName: null,
-	category: [],
+	categorias: [],
 };
 
 export default state;

@@ -48,7 +48,7 @@ export default defineComponent({
     },
     computed: {
         ...mapGetters({
-            categories: 'category',
+            categories: 'categorias',
             user: 'user'
         })
     },

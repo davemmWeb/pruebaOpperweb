@@ -63,9 +63,18 @@ export default defineComponent({
                     icon: 'warning',
                     title: 'Oops...',
                     text: 'Ingresa la categoria!',
+                    showConfirmButton: false,
+                    timer: 20000
                 })
             } else {
                 this.put_category_action(this.id, this.category)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Felicidades',
+                    text: 'Se actualizo la categoria!',
+                    showConfirmButton: false,
+                    timer: 20000
+                })
                 this.$router.push("/categories")
             }
         },

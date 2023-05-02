@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Login from "@/views/Login.vue";
 
 const routes = [
 	{
@@ -31,6 +30,10 @@ const routes = [
 		path: "/create",
 		name: "Create",
 		component: () => import("@/views/Create.vue"),
+	},
+	{
+		path: "/:catchAll(.*)",
+		redirect: "/",
 	},
 ];
 

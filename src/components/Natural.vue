@@ -125,14 +125,23 @@ export default defineComponent({
         submit() {
             const { name, lastname, telephone, identy_document, password, password_confirmation, email } = this.newUser
             if (![name, lastname, telephone, identy_document, password, password_confirmation, email].every(Boolean)) {
-                // Swal({
-                //     icon: 'error',
-                //     title: 'Oops...',
-                //     text: 'Completa los datos!'
-                // })
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Completa los datos!',
+                    showConfirmButton: false,
+                    timer: 20000
+                })
                 console.log('datos incompletos');
             } else {
                 this.register_action(this.newUser)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Felicidades',
+                    text: 'Registro exitoso!',
+                    showConfirmButton: false,
+                    timer: 20000
+                })
                 this.$router.push("/")
             }
         },

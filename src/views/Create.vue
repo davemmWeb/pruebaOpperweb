@@ -62,9 +62,18 @@ export default defineComponent({
                     icon: 'warning',
                     title: 'Oops...',
                     text: 'Ingresa la categoria!',
+                    showConfirmButton: false,
+                    timer: 20000
                 })
             } else {
                 this.create_category_action(this.category)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Felicidades',
+                    text: 'Se creo la categoria!',
+                    showConfirmButton: false,
+                    timer: 20000
+                })
                 this.$router.push("/categories")
             }
         },

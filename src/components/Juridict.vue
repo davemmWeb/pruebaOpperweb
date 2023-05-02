@@ -106,14 +106,22 @@ export default defineComponent({
         submit() {
             const { telephone, NIT, razon_social, password, password_confirmation, email } = this.newRazon
             if (![telephone, NIT, razon_social, password, password_confirmation, email].every(Boolean)) {
-                // Swal({
-                //     icon: 'error',
-                //     title: 'Oops...',
-                //     text: 'Completa los datos!'
-                // })
-                console.log('datos incompletos');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Completa los datos!',
+                    showConfirmButton: false,
+                    timer: 20000
+                })
             } else {
                 this.register_action(this.newRazon)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Felicidades',
+                    text: 'Registro exitoso!',
+                    showConfirmButton: false,
+                    timer: 20000
+                })
                 this.$router.push("/")
             }
         },

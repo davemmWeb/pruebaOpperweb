@@ -113,6 +113,9 @@ export default defineComponent({
           icon: 'error',
           title: 'Oops...',
           text: 'Completa los datos!',
+          showConfirmButton: false,
+          timer: 20000
+
         })
       } else if (!this.user.name || !this.user.password) {
         // console.log('El usuario no esta registrado');
@@ -120,12 +123,16 @@ export default defineComponent({
           icon: 'error',
           title: 'Oops...',
           text: 'Usuario no registrado!',
+          showConfirmButton: false,
+          timer: 20000
         })
       } else if (email !== this.user.email || password !== this.user.password) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Usuario o contraseña incorrectos!',
+          showConfirmButton: false,
+          timer: 20000
         })
       } else {
         this.$router.push("/home")
