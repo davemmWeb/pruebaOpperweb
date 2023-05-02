@@ -124,8 +124,14 @@ export default defineComponent({
           title: 'Oops...',
           text: 'Completa los datos!',
         })
-      } else if (email !== this.user.email || password !== this.user.password) {
+      } else if (!this.user.name || !this.user.password) {
         // console.log('El usuario no esta registrado');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Usuario no registrado!',
+        })
+      } else if (email !== this.user.email || password !== this.user.password) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

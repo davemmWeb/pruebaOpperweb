@@ -54,6 +54,7 @@ export const get_user_action = async ({ commit }, id) => {
 };
 
 export const logout_action = ({ commit }) => {
+	storage.removeItem("user_email");
 	commit(types.LOGOUT_USER);
 };
 

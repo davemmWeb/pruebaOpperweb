@@ -17,7 +17,7 @@ const mutations = {
 		state.categories = categories;
 	},
 	[types.CREATE_CATEGORY](state, category) {
-		state.categories.push(category);
+		state.category.push(category);
 	},
 };
 
