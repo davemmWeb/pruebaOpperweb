@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="register_action(newRazon)" class="mt-8 grid grid-cols-6 gap-6">
+    <form @submit.prevent="submit()" class="mt-8 grid grid-cols-6 gap-6">
         <div class="col-span-6 sm:col-span-3">
             <label for="RazonSocial" class="block text-sm font-medium text-gray-700">
                 Razón social
@@ -65,6 +65,11 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { mapActions, mapGetters } from 'vuex';
+import sha256 from '@/utils/signature';
+import Swal from 'sweetalert2';
+import timezone from '@/utils/timezone';
+const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
 export default defineComponent({
     name: 'Juridict',
@@ -79,11 +84,43 @@ export default defineComponent({
                 password: "",
                 password_confirmation: "",
                 email: "",
-                apiKey: "",
-                utcTimeStamp: "",
+                apiKey: publicKey,
+                utcTimeStamp: timezone(),
                 signature: ""
             }
         }
+    },
+    async mounted() {
+        const hashedSiganature = await sha256()
+        this.newRazon.signature = hashedSiganature
+    },
+    computed: {
+        ...mapGetters({
+            user: 'user'
+        })
+    },
+    methods: {
+        ...mapActions({
+            register_action: 'register_action'
+        }),
+        submit() {
+            const { telephone, NIT, razon_social, password, password_confirmation, email } = this.newRazon
+            if (![telephone, NIT, razon_social, password, password_confirmation, email].every(Boolean)) {
+                // Swal({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: 'Completa los datos!'
+                // })
+                console.log('datos incompletos');
+            } else {
+                this.register_action(this.newRazon)
+                this.$router.push("/")
+            }
+        },
+        async mounted() {
+            const hashedSiganature = await sha256()
+            this.newRazon.signature = hashedSiganature
+        },
     }
 })
 </script>

@@ -86,6 +86,8 @@ import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import sha256 from '@/utils/signature';
 import Swal from 'sweetalert2';
+import timezone from '@/utils/timezone';
+const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
 export default defineComponent({
     name: 'Natural',
@@ -101,6 +103,8 @@ export default defineComponent({
                 password: '',
                 password_confirmation: '',
                 email: '',
+                apiKey: publicKey,
+                utcTimeStamp: timezone(),
                 signature: ''
             }
         }
@@ -119,8 +123,8 @@ export default defineComponent({
             register_action: 'register_action'
         }),
         submit() {
-            const { name, lastname, telephone, identy_document, type_user_id, verify_tc, password, password_confirmation, email, signature } = this.newUser
-            if (![name, lastname, telephone, identy_document, type_user_id, verify_tc, password, password_confirmation, email, signature].every(Boolean)) {
+            const { name, lastname, telephone, identy_document, password, password_confirmation, email } = this.newUser
+            if (![name, lastname, telephone, identy_document, password, password_confirmation, email].every(Boolean)) {
                 // Swal({
                 //     icon: 'error',
                 //     title: 'Oops...',
@@ -131,7 +135,11 @@ export default defineComponent({
                 this.register_action(this.newUser)
                 this.$router.push("/")
             }
-        }
+        },
+        async mounted() {
+            const hashedSiganature = await sha256()
+            this.newUser.signature = hashedSiganature
+        },
     }
 })
 </script>

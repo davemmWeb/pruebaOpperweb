@@ -18,19 +18,19 @@ const routes = [
 		component: () => import("@/views/BackofficeSelect.vue"),
 	},
 	{
-		path: "/backoffice/categories",
-		name: "BackofficeCategories",
-		component: () => import("@/views/BackofficeCategories.vue"),
+		path: "/categories",
+		name: "Categories",
+		component: () => import("@/views/Categories.vue"),
 	},
 	{
-		path: "/backoffice/update",
-		name: "BackofficeUpdate",
+		path: "/update/:id",
+		name: "update",
 		component: () => import("@/views/BackofficeUpdate.vue"),
 	},
 	{
-		path: "/backoffice/create",
-		name: "BackofficeCreate",
-		component: () => import("@/views/BackofficeCreate.vue"),
+		path: "/create",
+		name: "Create",
+		component: () => import("@/views/Create.vue"),
 	},
 ];
 

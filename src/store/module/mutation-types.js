@@ -1,3 +1,6 @@
-export const REGISTER_ACTION = "REGISTER_ACTION";
-export const LOGIN_ACTION = "LOGIN_ACTION";
-export const LOGOUT_ACTION = "LOGOUT_ACTION";
+export const REGISTER_USER = "REGISTER_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const GET_USER = "GET_USER";
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const CREATE_CATEGORY = "CREATE_CATEGORY";

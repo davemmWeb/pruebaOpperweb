@@ -22,7 +22,6 @@
             </svg>
           </a>
 
-          <p class="text-white">{{ user }}</p>
           <h1 class="text-white mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
             ひさしぶり!
           </h1>
@@ -130,7 +129,7 @@ export default defineComponent({
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'El usuario no esta registrado!',
+          text: 'Usuario o contraseña incorrectos!',
         })
       } else {
         this.$router.push("/backoffice/select")

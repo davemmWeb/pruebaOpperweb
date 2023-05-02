@@ -7,7 +7,7 @@
             <section class="bg-black text-white">
                 <form @submit.prevent="submit()" class="mx-auto px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8 h-screen">
                     <div class="mx-auto max-w-lg text-center mt-20">
-                        <h2 class="text-3xl font-bold sm:text-4xl">Actualizar categoría</h2>
+                        <h2 class="text-3xl font-bold sm:text-4xl">Crear categoría</h2>
                         <label htmlFor="Category" class="block text-xs font-medium text-white-700 mt-12">
                             Nombre de la categoria
                         </label>
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="flex justify-center items-center">
-                        <button class="rounded-md bg-pink-600 mt-8 w-96 h-12">Actualizar</button>
+                        <button class="rounded-md bg-pink-600 mt-8 w-96 h-12">Crear</button>
                     </div>
                 </form>
             </section>
@@ -28,22 +28,21 @@
 <script>
 import { defineComponent } from 'vue';
 import NavBar from '@/components/NavBar.vue';
-import { mapActions } from 'vuex';
 import Swal from 'sweetalert2';
 import sha256 from '@/utils/signature';
 import timezone from "../utils/timezone"
+import { mapActions } from 'vuex';
 const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
 
 export default defineComponent({
-    name: "BackofficeUpdate",
+    name: "Create",
     components: {
         NavBar,
 
     },
     data() {
         return {
-            id: this.$route.params.id,
             category: {
                 nombre: "",
                 apiKey: publicKey,
@@ -54,7 +53,7 @@ export default defineComponent({
     },
     methods: {
         ...mapActions({
-            put_category_action: 'put_category_action'
+            create_category_action: 'create_category_action'
         }),
         submit() {
             if (!this.category.nombre) {
@@ -65,7 +64,7 @@ export default defineComponent({
                     text: 'Ingresa la categoria!',
                 })
             } else {
-                this.put_category_action(this.id, this.category)
+                this.create_category_action(this.category)
                 this.$router.push("/categories")
             }
         },
