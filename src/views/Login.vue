@@ -3,7 +3,7 @@
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
       <div class="bg-fuchsia-950  lg:order-last lg:col-span-5  xl:col-span-6 left-10">
         <div class="relative">
-          <img src="../assets/Ellipse 2.png" alt="">
+          <img src="../assets/elipse.png" alt="">
         </div>
         <div class="absolute top-0 w-96 h-100 z-10">
           <Slice />
