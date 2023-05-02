@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="setUser(newRazon)" class="mt-8 grid grid-cols-6 gap-6">
+    <form @submit.prevent="register_action(newRazon)" class="mt-8 grid grid-cols-6 gap-6">
         <div class="col-span-6 sm:col-span-3">
             <label for="RazonSocial" class="block text-sm font-medium text-gray-700">
                 Razón social

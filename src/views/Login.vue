@@ -31,13 +31,13 @@
             !Hola, te extrañamos¡
           </p>
 
-          <form @submit.prevent="login(user)" class="mt-8 grid grid-cols-6 gap-6">
+          <form @submit.prevent="submit()" class="mt-8 grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
               <label for="FirstName" class="block text-sm font-medium text-gray-700">
                 Email
               </label>
 
-              <input type="text" id="Email" name="email" v-model="login.email"
+              <input type="text" id="Email" name="email" v-model="userLogin.email"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
             </div>
 
@@ -46,7 +46,7 @@
                 Password
               </label>
 
-              <input type="password" id="Password" name="password" v-model="login.password"
+              <input type="password" id="Password" name="password" v-model="userLogin.password"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
             </div>
 
@@ -64,13 +64,15 @@
             </div>
 
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button
+              <button type="submit"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-purple-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
-                <router-link to="/backoffice/select" class="text-gray-700">Acceder</router-link>
+                <!-- <router-link to="/backoffice/select" class="text-gray-700"></router-link> -->
+                Acceder
               </button>
+
               <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                 Quieres registrarte ?
-                <router-link to="/register" class="text-gray-700 underline">Registrarse</router-link>.
+                <router-link to="/register" class="text-gray-700 underline">Registrarse</router-link>
               </p>
             </div>
           </form>
@@ -85,6 +87,10 @@ import { defineComponent } from 'vue';
 import Swal from 'sweetalert2';
 import Slice from "../components/Slice.vue"
 import { mapActions, mapGetters } from 'vuex';
+import sha256 from '@/utils/signature';
+import timezone from "../utils/timezone"
+const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+
 export default defineComponent({
   name: 'Login',
   components: {
@@ -92,21 +98,14 @@ export default defineComponent({
   },
   data() {
     return {
-      user: {
+      userLogin: {
         email: '',
         password: '',
-        apiKey: "VBNfgfTYrt5666FGHFG6FGH65GHFGHF656g",
-        utcTimeStamp: "2022-01-20T09:39:38Z",
-        signature: "756403b52606111ee553e75e927bc0d92cc376d2aa63d469ee6d851e2cc04e9a"
+        apiKey: publicKey,
+        utcTimeStamp: timezone(),
+        signature: ''
       }
     }
-  },
-  alert() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!'
-    })
   },
   computed: {
     ...mapGetters({
@@ -115,8 +114,32 @@ export default defineComponent({
   },
   methods: {
     ...mapActions({
-      login: 'login'
-    })
+      login_action: 'login_action'
+    }),
+    submit() {
+      const { email, password } = this.userLogin
+      if (![email, password].every(Boolean)) {
+        // console.log('datos incompletos');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Completa los datos!',
+        })
+      } else if (email !== this.user.email || password !== this.user.password) {
+        // console.log('El usuario no esta registrado');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El usuario no esta registrado!',
+        })
+      } else {
+        this.$router.push("/backoffice/select")
+      }
+    },
+    async mounted() {
+      const hashedSiganature = await sha256()
+      this.userLogin.signature = hashedSiganature
+    },
   }
 })
 </script>

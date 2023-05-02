@@ -1,6 +1,5 @@
 <template>
-    <p>{{ user }}</p>
-    <form @submit.prevent="setUser(newUser)" class="mt-8 grid grid-cols-6 gap-6">
+    <form @submit.prevent="submit()" class="mt-8 grid grid-cols-6 gap-6">
         <div class="col-span-6 sm:col-span-3">
             <label for="Name" class="block text-sm font-medium text-gray-700">
                 Nombre
@@ -86,6 +85,7 @@
 import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import sha256 from '@/utils/signature';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
     name: 'Natural',
@@ -116,8 +116,22 @@ export default defineComponent({
     },
     methods: {
         ...mapActions({
-            setUser: 'setUser'
-        })
+            register_action: 'register_action'
+        }),
+        submit() {
+            const { name, lastname, telephone, identy_document, type_user_id, verify_tc, password, password_confirmation, email, signature } = this.newUser
+            if (![name, lastname, telephone, identy_document, type_user_id, verify_tc, password, password_confirmation, email, signature].every(Boolean)) {
+                // Swal({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: 'Completa los datos!'
+                // })
+                console.log('datos incompletos');
+            } else {
+                this.register_action(this.newUser)
+                this.$router.push("/")
+            }
+        }
     }
 })
 </script>

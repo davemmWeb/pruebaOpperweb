@@ -24,8 +24,6 @@
                     <h1 class="text-white mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                         ひさしぶり!
                     </h1>
-                    <p class="text-white">{{ user }}</p>
-
                     <p class="mt-4 leading-relaxed text-gray-500">
                         Bienvenidos(a)!
                     </p>
@@ -72,21 +70,6 @@ export default defineComponent({
             type: ''
         }
     },
-    async mounted() {
-        const hashedSignature = await sha256();
-        this.newUser.signature = hashedSignature;
-    },
-    computed: {
-        ...mapGetters({
-            auth: 'auth',
-            user: 'user'
-        })
-    },
-    methods: {
-        ...mapActions({
-            setUser: 'setUser'
-        })
-    }
 })
 </script>
     

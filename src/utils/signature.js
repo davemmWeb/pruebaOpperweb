@@ -1,4 +1,4 @@
-import axios from "axios";
+import timezone from "./timezone";
 
 const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 const privateKey = import.meta.env.VITE_PRIVATE_KEY;
@@ -22,11 +22,11 @@ async function sha256(message) {
 // 	console.log(hash);
 // });
 
-const timezone = async () => {
-	const res = await axios.get("https://front.opperdev.com/api/timezone");
-	const time = await res.data;
-	return time.timezone;
-};
+// const timezone = async () => {
+// 	const res = await axios.get("https://front.opperdev.com/api/timezone");
+// 	const time = await res.data;
+// 	return time.timezone;
+// };
 
 sha256(privateKey + "," + publicKey + "," + timezone()).then((hash) => {
 	return hash;

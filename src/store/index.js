@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
-import moduleLogin from "./login";
+import module from "./module";
 
 export default createStore({
 	modules: {
-		moduleLogin,
+		module,
 	},
 });
