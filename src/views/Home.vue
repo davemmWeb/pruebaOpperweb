@@ -20,12 +20,12 @@
                             <h2 class="mt-4 text-xl font-bold text-white">Ver todas las categorias</h2>
                         </router-link>
 
-                        <router-link to="/backoffice/update"
+                        <router-link to="/update"
                             class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10">
                             <h2 class="mt-4 text-xl font-bold text-white">Crear categorias</h2>
                         </router-link>
 
-                        <router-link to="/backoffice/create"
+                        <router-link to="/create"
                             class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10">
                             <h2 class="mt-4 text-xl font-bold text-white">Cerrar sesion</h2>
                         </router-link>
@@ -42,7 +42,7 @@ import NavBar from '@/components/NavBar.vue';
 import { mapGetters } from 'vuex';
 
 export default defineComponent({
-    name: "Backoffice",
+    name: "Home",
     components: {
         NavBar,
     },

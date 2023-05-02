@@ -13,9 +13,9 @@ const routes = [
 		component: () => import("@/views/Register.vue"),
 	},
 	{
-		path: "/backoffice/select",
-		name: "BackofficeSelect",
-		component: () => import("@/views/BackofficeSelect.vue"),
+		path: "/home",
+		name: "Home",
+		component: () => import("@/views/Home.vue"),
 	},
 	{
 		path: "/categories",
@@ -24,8 +24,8 @@ const routes = [
 	},
 	{
 		path: "/update/:id",
-		name: "update",
-		component: () => import("@/views/BackofficeUpdate.vue"),
+		name: "Update",
+		component: () => import("@/views/Update.vue"),
 	},
 	{
 		path: "/create",

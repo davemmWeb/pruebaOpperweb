@@ -2,31 +2,32 @@
   <div class="max-w-[1400px] w-full m-auto py-16 px-4 relative group">
     <div v-if="slides.length > 0" :style="{
         backgroundImage: `url(${slides[currentIndex].url})`,
-        backgroundSize: '60% auto',
+        backgroundSize: '70% auto',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        height: '65vh',
-      }" class="w-full bg-center bg-cover duration-50">
-      <h1>{{ slides[currentIndex].alt }}</h1>
+        height: '60vh',
+      }" class="duration-50">
+      <h1 class="absolute text-4xl bottom-4 left-40 text-white">{{ slides[currentIndex].alt }}</h1>
     </div>
 
     <!-- Left Arrow -->
     <div v-if="slides.length > 0"
       class="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
       @click="prevSlide">
-      <button :size="30">Prev</button>
+      <button :size="30"></button>
+
 
     </div>
     <!-- Right Arrow -->
     <div v-if="slides.length > 0"
       class="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
       @click="nextSlide">
-      <button :size="30">></button>
+      <button :size="30"></button>
     </div>
     <div class="flex top-4 justify-center py-2">
       <div v-for="(slide, slideIndex) in slides" :key="slideIndex" @click="goToSlide(slideIndex)"
-        class="text-2xl cursor-pointer">
-        <span />-
+        class="text-6xl cursor-pointer text-white">
+        <span /> -
       </div>
     </div>
   </div>

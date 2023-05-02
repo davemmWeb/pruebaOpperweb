@@ -36,7 +36,7 @@ const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
 
 export default defineComponent({
-    name: "BackofficeUpdate",
+    name: "Update",
     components: {
         NavBar,
 
