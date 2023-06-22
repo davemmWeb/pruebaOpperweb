@@ -98,8 +98,8 @@ export default defineComponent({
                 lastname: '',
                 telephone: '',
                 identy_document: '',
-                type_user_id: "2",
-                verify_tc: "1",
+                type_user_id: 2,
+                verify_tc: 1,
                 password: '',
                 password_confirmation: '',
                 email: '',
@@ -144,10 +144,6 @@ export default defineComponent({
                 })
                 this.$router.push("/")
             }
-        },
-        async mounted() {
-            const hashedSiganature = await sha256()
-            this.newUser.signature = hashedSiganature
         },
     }
 })

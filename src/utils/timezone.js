@@ -6,4 +6,6 @@ const timezone = async () => {
 	return time.timezone;
 };
 
+timezone();
+
 export default timezone;

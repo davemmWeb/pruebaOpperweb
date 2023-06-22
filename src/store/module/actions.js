@@ -11,7 +11,7 @@ export const register_action = async ({ commit }, user) => {
 	// 	const res = await axios.post(
 	// 		`${URL}/register`,
 	// 		{
-	// 			user
+	// 			user,
 	// 		},
 	// 		{
 	// 			headers: {
@@ -19,8 +19,8 @@ export const register_action = async ({ commit }, user) => {
 	// 			},
 	// 		}
 	// 	);
-	// 	commit(types.REGISTER_ACTION, res.data.token)
-	//  localStorage.setItem('token', res.data.token)
+	// 	commit(types.REGISTER_ACTION, res.data.token);
+	// 	localStorage.setItem("token", res.data.token);
 	// } catch (error) {
 	// 	console.log(error);
 	// }

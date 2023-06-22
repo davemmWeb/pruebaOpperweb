@@ -1,33 +1,32 @@
 <template>
-  <div class="max-w-[1400px] w-full m-auto py-16 px-4 relative group">
+  <div class="max-w-[1400px] mx-auto py-16 px-4 relative group">
     <div v-if="slides.length > 0" :style="{
-        backgroundImage: `url(${slides[currentIndex].url})`,
-        backgroundSize: '70% auto',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '60vh',
-      }" class="duration-50">
-      <h1 class="absolute text-4xl bottom-4 left-40 text-white">{{ slides[currentIndex].alt }}</h1>
+      backgroundImage: `url(${slides[currentIndex].url})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '60vh',
+    }" class="duration-50">
+      <h1 class="absolute text-4xl bottom-4 left-1/2 transform -translate-x-1/2 text-white 
+    md:text-2xl sm:bottom-2 sm:text-xl">{{ slides[currentIndex].alt }}</h1>
     </div>
 
     <!-- Left Arrow -->
     <div v-if="slides.length > 0"
-      class="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+      class="hidden group-hover:block absolute top-1/2 transform -translate-y-1/2 left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
       @click="prevSlide">
       <button :size="30"></button>
-
-
     </div>
     <!-- Right Arrow -->
     <div v-if="slides.length > 0"
-      class="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+      class="hidden group-hover:block absolute top-1/2 transform -translate-y-1/2 right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
       @click="nextSlide">
       <button :size="30"></button>
     </div>
-    <div class="flex top-4 justify-center py-2">
+    <div class="flex justify-center mt-4">
       <div v-for="(slide, slideIndex) in slides" :key="slideIndex" @click="goToSlide(slideIndex)"
-        class="text-6xl cursor-pointer text-white">
-        <span /> -
+        class="text-6xl cursor-pointer text-white mx-2">
+        <span>-</span>
       </div>
     </div>
   </div>

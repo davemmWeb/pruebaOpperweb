@@ -12,28 +12,28 @@
             <main aria-label="Main"
                 class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
                 <div class="max-w-xl lg:max-w-3xl">
-                    <img src="../assets/gato.png" alt="">
+                    <img src="../assets/gato.png" alt="gato">
                     <h1 class="text-white mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                         ひさしぶり!
                     </h1>
                     <p class="mt-4 leading-relaxed text-gray-500">
                         Bienvenidos(a)!
                     </p>
-                    <div class="text-white">
+                    <div class="text-white mt-4">
                         <p>Tipo de persona</p>
 
-                        <label for="Tipe">Natural</label>
-                        <input type="checkbox" class="indeterminate:bg-gray-300" name="natural"
-                            v-on:change="type = 'natural'" />
+                        <label for="natural">Natural</label>
+                        <input type="checkbox" class="indeterminate:bg-gray-300" id="natural" v-model="type" value="natural"
+                            @change="type = 'natural'" :checked="type === 'natural'" />
 
-                        <label for="Tipe">Juridica</label>
-                        <input type="checkbox" class="indeterminate:bg-gray-300" name="juridica"
-                            v-on:change="type = 'juridict'" />
+                        <label for="juridica">Juridica</label>
+                        <input type="checkbox" class="indeterminate:bg-gray-300" id="juridica" v-model="type"
+                            value="juridict" @change="type = 'juridict'" :checked="type === 'juridict'" />
                     </div>
                     <div v-if="type === 'natural'">
                         <Natural />
                     </div>
-                    <div v-else="type === 'juridict'">
+                    <div v-else-if="type === 'juridict'">
                         <Juridict />
                     </div>
                 </div>
@@ -59,10 +59,16 @@ export default defineComponent({
     },
     data() {
         return {
-            type: ''
+            type: 'natural'
         }
     },
 })
 </script>
+
+<style scoped>
+img {
+    max-width: 100%;
+}
+</style>
     
     
