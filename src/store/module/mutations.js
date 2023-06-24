@@ -3,8 +3,8 @@ const mutations = {
 	[types.REGISTER_USER](state, user) {
 		(state.user = user), (state.auth = Boolean(user));
 	},
-	[types.LOGIN_USER](state, token) {
-		state.token = token;
+	[types.LOGIN_USER](state, user) {
+		state.user = user;
 	},
 	[types.LOGOUT_USER](state) {
 		state.token = null;

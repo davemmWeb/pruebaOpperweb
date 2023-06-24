@@ -18,7 +18,7 @@
           </h1>
 
           <p class="mt-4 leading-relaxed text-gray-500">
-            !Hola, te extrañamos¡
+            ! Hi, we miss you ¡
           </p>
 
           <form @submit.prevent="submit()">
@@ -46,7 +46,7 @@
               <p class="text-sm text-gray-500">
 
                 <a href="#" class="text-gray-700 underline">
-                  ¿ Olvido la contraseña ?
+                  ¿ Forgot password ?
                 </a>
 
               </p>
@@ -56,12 +56,12 @@
               <button type="submit"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-purple-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
                 <!-- <router-link to="/backoffice/select" class="text-gray-700"></router-link> -->
-                Acceder
+                Login
               </button>
 
               <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                Quieres registrarte ?
-                <router-link to="/register" class="text-gray-700 underline">Registrarse</router-link>
+                Are you register ?
+                <router-link to="/register" class="text-gray-700 underline">Register</router-link>
               </p>
             </div>
           </form>
@@ -76,9 +76,6 @@ import { defineComponent } from 'vue';
 import Swal from 'sweetalert2';
 import Slice from "../components/Slice.vue"
 import { mapActions, mapGetters } from 'vuex';
-import sha256 from '@/utils/signature';
-import timezone from "../utils/timezone"
-const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
 export default defineComponent({
   name: 'Login',
@@ -90,9 +87,6 @@ export default defineComponent({
       userLogin: {
         email: '',
         password: '',
-        apiKey: publicKey,
-        utcTimeStamp: timezone(),
-        signature: ''
       }
     }
   },
@@ -108,40 +102,20 @@ export default defineComponent({
     submit() {
       const { email, password } = this.userLogin
       if (![email, password].every(Boolean)) {
-        // console.log('datos incompletos');
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Completa los datos!',
+          text: 'Complete the data !',
           showConfirmButton: false,
           timer: 20000
+        })
 
-        })
-      } else if (!this.user.name || !this.user.password) {
-        // console.log('El usuario no esta registrado');
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Usuario no registrado!',
-          showConfirmButton: false,
-          timer: 20000
-        })
-      } else if (email !== this.user.email || password !== this.user.password) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Usuario o contraseña incorrectos!',
-          showConfirmButton: false,
-          timer: 20000
-        })
       } else {
+        this.login_action(this.userLogin)
         this.$router.push("/home")
       }
     },
-    async mounted() {
-      const hashedSiganature = await sha256()
-      this.userLogin.signature = hashedSiganature
-    },
+
   }
 })
 </script>

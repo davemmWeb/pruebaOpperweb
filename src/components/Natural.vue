@@ -2,33 +2,33 @@
     <form @submit.prevent="submit()" class="mt-8 grid grid-cols-6 gap-6">
         <div class="col-span-6 sm:col-span-3">
             <label for="Name" class="block text-sm font-medium text-gray-700">
-                Nombre
+                Name
             </label>
-            <input type="text" id="name" name="name" v-model="newUser.name"
+            <input type="text" id="name" name="name" v-model="newUser.firstName"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
         </div>
 
         <div class="col-span-6 sm:col-span-3">
             <label for="LastName" class="block text-sm font-medium text-gray-700">
-                Apellido
+                Last Name
             </label>
-            <input type="text" id="lastname" name="lastname" v-model="newUser.lastname"
+            <input type="text" id="lastname" name="lastname" v-model="newUser.lastName"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
         </div>
 
         <div class="col-span-6 sm:col-span-3">
             <label for="Phone" class="block text-sm font-medium text-gray-700">
-                Telefono
+                Phone
             </label>
-            <input type="text" id="telephone" name="telephone" v-model="newUser.telephone"
+            <input type="text" id="telephone" name="telephone" v-model="newUser.phone"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
         </div>
 
         <div class="col-span-6 sm:col-span-3">
             <label for="IdentyDocument" class="block text-sm font-medium text-gray-700">
-                Numero de identificacion
+                Identification Number
             </label>
-            <input type="text" id="identy_document" name="identy_document" v-model="newUser.identy_document"
+            <input type="text" id="identy_document" name="identy_document" v-model="newUser.identificationNumber"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
         </div>
 
@@ -50,7 +50,7 @@
 
         <div class="col-span-6 sm:col-span-3">
             <label for="ConfirmationPassword" class="block text-sm font-medium text-gray-700">
-                Confirmar contraseña
+                Confirm password
             </label>
             <input type="password" id="password_confirmation" name="password_confirmation"
                 v-model="newUser.password_confirmation"
@@ -61,7 +61,7 @@
             <p class="text-sm text-gray-500">
 
                 <a href="#" class="text-gray-700 underline">
-                    ¿ Olvido la contraseña ?
+                    ¿ Forgot password ?
                 </a>
 
             </p>
@@ -70,12 +70,12 @@
         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button type="submit"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-purple-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
-                Registrar
+                Register
             </button>
 
             <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                ya estas registrado
-                <router-link to="/" class="text-gray-700 underline">Acceder</router-link>.
+                Are you register ?
+                <router-link to="/" class="text-gray-700 underline">Login</router-link>.
             </p>
         </div>
     </form>
@@ -87,31 +87,21 @@ import { mapActions, mapGetters } from 'vuex';
 import sha256 from '@/utils/signature';
 import Swal from 'sweetalert2';
 import timezone from '@/utils/timezone';
-const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
 export default defineComponent({
     name: 'Natural',
     data() {
         return {
             newUser: {
-                name: '',
-                lastname: '',
-                telephone: '',
-                identy_document: '',
-                type_user_id: 2,
-                verify_tc: 1,
+                firstName: '',
+                lastName: '',
+                phone: '',
+                identificationNumber: '',
+                email: '',
                 password: '',
                 password_confirmation: '',
-                email: '',
-                apiKey: publicKey,
-                utcTimeStamp: timezone(),
-                signature: ''
             }
         }
-    },
-    async mounted() {
-        const hashedSiganature = await sha256()
-        this.newUser.signature = hashedSiganature
     },
     computed: {
         ...mapGetters({
@@ -123,8 +113,8 @@ export default defineComponent({
             register_action: 'register_action'
         }),
         submit() {
-            const { name, lastname, telephone, identy_document, password, password_confirmation, email } = this.newUser
-            if (![name, lastname, telephone, identy_document, password, password_confirmation, email].every(Boolean)) {
+            const { firstName, lastName, phone, identificationNumber, email, password } = this.newUser
+            if (![firstName, lastName, phone, identificationNumber, email, password].every(Boolean)) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
@@ -132,7 +122,6 @@ export default defineComponent({
                     showConfirmButton: false,
                     timer: 20000
                 })
-                console.log('datos incompletos');
             } else {
                 this.register_action(this.newUser)
                 Swal.fire({

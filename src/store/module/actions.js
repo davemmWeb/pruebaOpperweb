@@ -7,36 +7,21 @@ const storage = window.localStorage;
 export const register_action = async ({ commit }, user) => {
 	commit(types.REGISTER_USER, user);
 	storage.setItem("user_email", user.email);
-	// try {
-	// 	const res = await axios.post(
-	// 		`${URL}/register`,
-	// 		{
-	// 			user,
-	// 		},
-	// 		{
-	// 			headers: {
-	// 				Accept: "application/json",
-	// 			},
-	// 		}
-	// 	);
-	// 	commit(types.REGISTER_ACTION, res.data.token);
-	// 	localStorage.setItem("token", res.data.token);
-	// } catch (error) {
-	// 	console.log(error);
-	// }
+	try {
+		await axios.post(`${URL}/users`, user);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 export const login_action = async ({ commit }, user) => {
-	commit(
-		types.LOGIN_USER,
-		"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRw"
-	);
-	// try {
-	// 	const res = await axios.post(`${URL}/login`, user);
-	// 	commit(types.LOGIN_ACTION, res.data.token);
-	// } catch (error) {
-	// 	console.log(error);
-	// }
+	const { email, password } = user;
+	try {
+		const res = await axios.post(`${URL}/users/login`, { email, password });
+		commit(types.LOGIN_USER, res.data);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 export const get_user_action = async ({ commit }, id) => {
