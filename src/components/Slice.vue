@@ -2,10 +2,10 @@
   <div class="max-w-[1400px] mx-auto py-16 px-4 relative group">
     <div v-if="slides.length > 0" :style="{
       backgroundImage: `url(${slides[currentIndex].url})`,
-      backgroundSize: 'cover',
+      backgroundSize: '30vh',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      height: '60vh',
+      height: '50vh',
     }" class="duration-50">
       <h1 class="absolute text-4xl bottom-4 left-1/2 transform -translate-x-1/2 text-white 
     md:text-2xl sm:bottom-2 sm:text-xl">{{ slides[currentIndex].alt }}</h1>
